@@ -1,20 +1,23 @@
-import { useEffect, useState } from "react";
-import { TextInput, Text, StyleSheet, View } from "react-native";
+import { CloseComponente, OpenComponente } from "@/assets/images/SvgComponent";
+import React from "react";
+import { TextInput, Text, StyleSheet, View, TextInputProps } from "react-native";
 
-interface InputCore {
+interface InputCore extends TextInputProps {
     title?: string;
     type?: "default" | "email-address" | "numeric" | "phone-pad" | "number-pad" | "decimal-pad";
-    secure?: boolean
+    secure?: boolean;
+    IconSecure?: boolean;
     onChangeText?: (text: string) => void;
 }
 
-export default function InputCore({ title, type = "default", secure = false, onChangeText }: InputCore) {
-    const [text, setText] = useState('');
-    const [secureInput, setSecureInput] = useState(false);
+export default function InputCore({ title, type = "default", secure, IconSecure, onChangeText, placeholder, ...ress }: InputCore) {
+    const [text, setText] = React.useState('');
+    const [secureInput, setSecureInput] = React.useState(false);
 
-    useEffect(() => {
-        setSecureInput(secure)
-    }, [secure])
+    React.useEffect(() => {
+        if (secure)
+            setSecureInput(secure)
+    }, [])
 
     function visable() {
         setSecureInput(!secureInput)
@@ -37,9 +40,10 @@ export default function InputCore({ title, type = "default", secure = false, onC
                     value={text}
                     keyboardType={type}
                     secureTextEntry={secureInput}
-                    placeholder="Escreva aqui"
+                    placeholder={placeholder}
+                    {...ress}
                 />
-                {secure && <Text onPress={visable}>Icon</Text>}
+                {IconSecure && (secureInput ? <Text style={styles.icon} onPress={visable}><OpenComponente /></Text> : <Text style={styles.icon} onPress={visable}><CloseComponente /></Text>)}
             </View>
         </View>
     )
@@ -65,11 +69,15 @@ const styles = StyleSheet.create({
     },
     input: {
         color: "#1E3A8A",
-        width: "90%",
+        width: "85%",
         fontSize: 16,
         height: 41,
         fontStyle: "normal",
         fontWeight: "500",
         paddingHorizontal: 6,
     },
+    icon: {
+        height: '80%',
+        margin: 'auto',
+    }
 });

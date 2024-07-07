@@ -1,13 +1,14 @@
 import ButtonCore from '@/components/buttons/button';
 import InputCore from '@/components/inputs/input';
-import { useRouter } from 'expo-router';
-import { View, StyleSheet, Text } from 'react-native';
+import { Link, useRouter } from 'expo-router';
+import { View, StyleSheet, Text, KeyboardAvoidingView, Platform } from 'react-native';
 
 export default function HomeScreen() {
   const router = useRouter();
 
   function logar() {
     console.log('logar')
+    router.push('/home');
   }
 
   function create() {
@@ -19,15 +20,20 @@ export default function HomeScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.container}>
       <Text style={styles.text}>Bem Vindo!</Text>
       <View style={styles.content}>
-        <InputCore title="Usuário ou Email" type='default' secure={false} onChangeText={(text) => inputText(text)} />
-        <InputCore title="Senha" type='default' secure={true} onChangeText={(text) => inputText(text)} />
-        <ButtonCore onPress={logar}>Logar</ButtonCore>
-        <ButtonCore onPress={create} variable='secondary'>Criar</ButtonCore>
+        <View style={styles.input}>
+          <InputCore title="Usuário ou Email" type='default' onChangeText={(text) => inputText(text)} />
+          <InputCore title="Senha" type='default' secure={true} IconSecure={true} onChangeText={(text) => inputText(text)} />
+        </View>
+        <View style={styles.action}>
+          <ButtonCore onPress={logar}>Logar</ButtonCore>
+          <Link href={'reset'}>Esqueci a senha</Link>
+          <ButtonCore onPress={create} variable='secondary'>Criar</ButtonCore>
+        </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 const styles = StyleSheet.create({
@@ -45,13 +51,23 @@ const styles = StyleSheet.create({
     paddingTop: 65,
     paddingBottom: 65,
   },
+  input: {
+    gap: 23,
+    marginBottom: 70
+  },
+  action: {
+    gap: 19,
+    alignItems: "center"
+  },
   content: {
-    flex: 2,
+    flex: 1,
     backgroundColor: "#fff",
     height: 745,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     alignItems: "center",
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
+    paddingTop: 90,
+    marginBottom: -50
   },
 });

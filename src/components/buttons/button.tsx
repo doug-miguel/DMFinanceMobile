@@ -1,25 +1,33 @@
 import { ReactNode } from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
 
-interface IBtn {
+interface IBtn extends PressableProps {
     onPress: () => void;
     children?: ReactNode;
-    variable?: "primary" | "secondary"
+    variable?: "primary" | "secondary";
+    size?: "sm" | "md" | "lg"
 }
 
-export default function ButtonCore({ onPress, children, variable = "primary" }: IBtn) {
+export default function ButtonCore({ onPress, children, size = "md", variable = "primary", ...rest }: IBtn) {
+    const buttonStyle = [
+        variable === "primary" ? styles.primary : styles.secondary,
+        size === "sm" ? styles.sizesm : size === "lg" ? styles.sizelg : styles.sizemd
+    ];
+
     return (
-        <TouchableOpacity onPress={onPress} style={variable === "primary" ? styles.primary : styles.secondary}>
+        <Pressable
+            onPress={onPress}
+            style={buttonStyle}
+            {...rest}>
             <Text style={variable === "primary" ? styles.textPrimary : styles.textSecondary}>
                 {children}
             </Text>
-        </TouchableOpacity >
+        </Pressable >
     )
 }
 
 const styles = StyleSheet.create({
     primary: {
-        width: 207,
         height: 45,
         flexShrink: 0,
         borderRadius: 30,
@@ -37,7 +45,6 @@ const styles = StyleSheet.create({
         textTransform: "capitalize",
     },
     secondary: {
-        width: 207,
         height: 45,
         flexShrink: 0,
         borderRadius: 30,
@@ -54,5 +61,13 @@ const styles = StyleSheet.create({
         lineHeight: 22,
         textTransform: "capitalize",
     },
-
+    sizesm: {
+        width: 160,
+    },
+    sizemd: {
+        width: 207,
+    },
+    sizelg: {
+        width: 160,
+    }
 });
