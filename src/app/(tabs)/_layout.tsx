@@ -23,14 +23,6 @@ export default function TabLayout() {
           }
         }}
       />
-      {/* <Tabs.Screen
-        name="dashboard"
-        options={{
-          tabBarIcon: ({ color }) => {
-            return <Entypo name="bar-graph" size={24} color={color} />;
-          }
-        }}
-      /> */}
       <Tabs.Screen
         name="transaction"
         options={{
@@ -46,6 +38,10 @@ export default function TabLayout() {
             return <MaterialIcons name="category" size={24} color={color} />;
           }
         }}
+      />
+      <Tabs.Screen
+        name="detailscategoria/[id]"
+        options={{ tabBarButton: () => null }}
       />
       <Tabs.Screen
         name="user"

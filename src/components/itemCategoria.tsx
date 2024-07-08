@@ -3,9 +3,10 @@ import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 
 interface ItemCategoriProps {
     icon: any;
+    onPress: () => void;
 }
 
-export default function ItemCategoria({ icon }: ItemCategoriProps) {
+export default function ItemCategoria({ icon, onPress }: ItemCategoriProps) {
     function icons() {
         if (icon === 'Comida') return <FoodComponente />
         if (icon === 'Transporte') return <TransportComponente />
@@ -20,7 +21,7 @@ export default function ItemCategoria({ icon }: ItemCategoriProps) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.containerBtn}>
+            <TouchableOpacity onPress={onPress} style={styles.containerBtn}>
                 {icons()}
             </TouchableOpacity>
             <Text style={styles.text}>{icon}</Text>
