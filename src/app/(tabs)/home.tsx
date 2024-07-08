@@ -6,7 +6,9 @@ import Balance from "@/components/balance";
 import Base from "@/components/base";
 import Header from "@/components/header";
 import SpentDay from "@/components/spentDay";
-import ListTransaction from "@/components/listTransaction";
+import ListTransactionHome from "@/components/listTransactionHome";
+
+import { ListtransactionArrayHome } from "@/model/transacionModel";
 
 export default function HomeScreen() {
     return (
@@ -15,7 +17,7 @@ export default function HomeScreen() {
             <Balance amount={7000} amountSpent={3500} />
             <Base style={styles.content}>
                 <SpentDay />
-                <ListTransaction />
+                <ListTransactionHome Transactions={ListtransactionArrayHome} />
             </Base>
         </View>
     );

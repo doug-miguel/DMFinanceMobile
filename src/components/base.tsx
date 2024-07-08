@@ -2,7 +2,7 @@ import { StyleSheet, View, ViewStyle } from "react-native";
 
 interface BaseProps {
     children: React.ReactNode;
-    style: ViewStyle,
+    style?: ViewStyle,
 }
 
 const Base: React.FC<BaseProps> = ({ children, style }) => {
