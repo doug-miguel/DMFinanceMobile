@@ -23,14 +23,14 @@ export default function TabLayout() {
           }
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="dashboard"
         options={{
           tabBarIcon: ({ color }) => {
             return <Entypo name="bar-graph" size={24} color={color} />;
           }
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="transaction"
         options={{

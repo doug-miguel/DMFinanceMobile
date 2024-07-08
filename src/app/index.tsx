@@ -1,3 +1,4 @@
+import Base from '@/components/base';
 import ButtonCore from '@/components/buttons/button';
 import InputCore from '@/components/inputs/input';
 import { Link, useRouter } from 'expo-router';
@@ -22,7 +23,7 @@ export default function HomeScreen() {
   return (
     <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.container}>
       <Text style={styles.text}>Bem Vindo!</Text>
-      <View style={styles.content}>
+      <Base>
         <View style={styles.input}>
           <InputCore title="Usuário ou Email" type='default' onChangeText={(text) => inputText(text)} />
           <InputCore title="Senha" type='default' secure={true} IconSecure={true} onChangeText={(text) => inputText(text)} />
@@ -32,7 +33,7 @@ export default function HomeScreen() {
           <Link href={'reset'}>Esqueci a senha</Link>
           <ButtonCore onPress={create} variable='secondary'>Criar</ButtonCore>
         </View>
-      </View>
+      </Base>
     </KeyboardAvoidingView>
   );
 }
