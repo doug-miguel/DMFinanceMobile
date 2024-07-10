@@ -44,6 +44,10 @@ export default function TabLayout() {
         options={{ tabBarButton: () => null }}
       />
       <Tabs.Screen
+        name="expenses"
+        options={{ tabBarButton: () => null }}
+      />
+      <Tabs.Screen
         name="user"
         options={{
           tabBarIcon: ({ color }) => {

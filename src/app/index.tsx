@@ -25,8 +25,8 @@ export default function HomeScreen() {
       <Text style={styles.text}>Bem Vindo!</Text>
       <Base>
         <View style={styles.input}>
-          <InputCore title="Usuário ou Email" type='default' onChangeText={(text) => inputText(text)} />
-          <InputCore title="Senha" type='default' secure={true} IconSecure={true} onChangeText={(text) => inputText(text)} />
+          <InputCore title="Usuário ou Email" type='default' placeholder="Usuário ou Email" onChangeText={(text) => inputText(text)} />
+          <InputCore title="Senha" type='default' secure={true} IconSecure={true} placeholder="********" onChangeText={(text) => inputText(text)} />
         </View>
         <View style={styles.action}>
           <ButtonCore onPress={logar}>Logar</ButtonCore>

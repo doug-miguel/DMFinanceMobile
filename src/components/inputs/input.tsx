@@ -7,6 +7,7 @@ interface InputCore extends TextInputProps {
     type?: "default" | "email-address" | "numeric" | "phone-pad" | "number-pad" | "decimal-pad";
     secure?: boolean;
     IconSecure?: boolean;
+    placeholder?: string;
     onChangeText?: (text: string) => void;
 }
 
@@ -41,6 +42,7 @@ export default function InputCore({ title, type = "default", secure, IconSecure,
                     keyboardType={type}
                     secureTextEntry={secureInput}
                     placeholder={placeholder}
+                    placeholderTextColor="#3B82F6"
                     {...ress}
                 />
                 {IconSecure && (secureInput ? <Text style={styles.icon} onPress={visable}><OpenComponente /></Text> : <Text style={styles.icon} onPress={visable}><CloseComponente /></Text>)}

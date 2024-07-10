@@ -24,12 +24,12 @@ export default function CreateScreen() {
             <ScrollView>
                 <Text style={styles.text}>Criar conta!</Text>
                 <View style={styles.content}>
-                    <InputCore title="Nome completo" type='default' onChangeText={(text) => inputText(text)} />
-                    <InputCore title="Usuário ou Email" type='default' onChangeText={(text) => inputText(text)} />
-                    <InputCore title="Telefone" type='default' onChangeText={(text) => inputText(text)} />
-                    <InputCore title="Data de nacimento" type='default' onChangeText={(text) => inputText(text)} />
-                    <InputCore title="Senha" type='default' secure={true} IconSecure={true} onChangeText={(text) => inputText(text)} />
-                    <InputCore title="Confirmação de Senha" type='default' secure={true} IconSecure={true} onChangeText={(text) => inputText(text)} />
+                    <InputCore title="Nome completo" type='default' placeholder="Nome" onChangeText={(text) => inputText(text)} />
+                    <InputCore title="Usuário ou Email" type='default' placeholder="Usuário ou Email" onChangeText={(text) => inputText(text)} />
+                    <InputCore title="Telefone" type='default' placeholder="(XX) XXXXX-XXXX" onChangeText={(text) => inputText(text)} />
+                    <InputCore title="Data de nacimento" type='default' placeholder="XX/XX/XXXX" onChangeText={(text) => inputText(text)} />
+                    <InputCore title="Senha" type='default' secure={true} IconSecure={true} placeholder="********" onChangeText={(text) => inputText(text)} />
+                    <InputCore title="Confirmação de Senha" type='default' secure={true} placeholder="********" IconSecure={true} onChangeText={(text) => inputText(text)} />
                     <View style={styles.action}>
                         <ButtonCore onPress={navigate} size="sm" variable="secondary">Voltar</ButtonCore>
                         <ButtonCore onPress={create} size="sm">Criar</ButtonCore>
