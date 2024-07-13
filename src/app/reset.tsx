@@ -11,7 +11,7 @@ export default function ResetScreen() {
     const [reset, setReset] = React.useState(false);
 
     const router = useRouter();
-    const options: string[] = ["", "Qual primeira escola que estudou"];
+    const options: string[] = ["", "Qual primeira escola que estudou ?"];
 
     function navigate() {
         router.push('/')
@@ -36,12 +36,13 @@ export default function ResetScreen() {
             <Base>
                 <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}>
                     <ScrollView style={styles.content}>
-                        <Text style={styles.textBase}>Selecione a frase e responda corretamente!</Text>
+                        <Text style={styles.textBase}>Redefinir senha!</Text>
                         {!reset &&
                             <View style={styles.response}>
                                 <Select title="Selecione uma frace e responda" options={options} onSelect={onSelectMessage} />
                                 <InputCore title="Resposta" />
-                                <ButtonCore onPress={onNext}>Confirmar</ButtonCore>
+                                <ButtonCore onPress={onNext}>Proxima etapa</ButtonCore>
+                                <ButtonCore onPress={navigate} variable="secondary">Cancelar</ButtonCore>
                             </View>
                         }
                         {reset &&
@@ -49,6 +50,7 @@ export default function ResetScreen() {
                                 <InputCore title="Senha" type='default' secure={true} IconSecure={true} placeholder="********" onChangeText={(text) => inputText(text)} />
                                 <InputCore title="Confirmação de Senha" type='default' secure={true} placeholder="********" IconSecure={true} onChangeText={(text) => inputText(text)} />
                                 <ButtonCore onPress={navigate}>Confirmar</ButtonCore>
+                                <ButtonCore onPress={navigate} variable="secondary">Cancelar</ButtonCore>
                             </View>
                         }
                     </ScrollView>
@@ -84,7 +86,8 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         textTransform: 'capitalize',
         lineHeight: 20,
-        marginVertical: 20
+        marginBottom: 50,
+        textAlign: 'center'
     },
     response: {
         gap: 30,

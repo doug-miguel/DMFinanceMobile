@@ -9,7 +9,7 @@ export default function CreateScreen() {
     const [message, setMessage] = React.useState('');
     const router = useRouter();
 
-    const options: string[] = ["", "Qual primeira escola que estudou"];
+    const options: string[] = ["", "Qual primeira escola que estudou ?"];
 
     function onSelectMessage(mes: string) {
         console.log("🚀 ~ onSelectMen ~ mes:", mes);

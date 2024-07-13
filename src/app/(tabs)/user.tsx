@@ -1,6 +1,5 @@
 import { EditProfileComponente, LogoutComponente, SettingComponente } from "@/assets/images/SvgComponent";
 import Base from "@/components/base";
-import ButtonCore from "@/components/buttons/button";
 import Header from "@/components/header";
 import { useRouter } from "expo-router";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
