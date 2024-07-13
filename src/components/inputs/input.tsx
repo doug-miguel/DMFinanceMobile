@@ -32,7 +32,7 @@ export default function InputCore({ title, type = "default", secure, IconSecure,
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.textInput}>{title}</Text>
             <View style={styles.containerInput}>
                 <TextInput
@@ -52,6 +52,10 @@ export default function InputCore({ title, type = "default", secure, IconSecure,
 }
 
 const styles = StyleSheet.create({
+    container: {
+        position: 'relative',
+        zIndex: 5
+    },
     textInput: {
         color: "#1E40AF",
         fontSize: 15,

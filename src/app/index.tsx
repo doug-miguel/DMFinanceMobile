@@ -30,7 +30,7 @@ export default function HomeScreen() {
         </View>
         <View style={styles.action}>
           <ButtonCore onPress={logar}>Logar</ButtonCore>
-          <Link href={'reset'}>Esqueci a senha</Link>
+          <Link href={'reset'} style={styles.reset}>Esqueci a senha!</Link>
           <ButtonCore onPress={create} variable='secondary'>Criar</ButtonCore>
         </View>
       </Base>
@@ -40,6 +40,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom: -50
   },
   text: {
     textAlign: "center",
@@ -70,5 +71,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingTop: 90,
     marginBottom: -50
+  },
+  reset: {
+    textDecorationLine: 'underline',
+    color: '#031314',
+    fontSize: 16
   },
 });

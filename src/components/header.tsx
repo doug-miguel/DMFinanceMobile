@@ -42,7 +42,7 @@ export default function Header({ back = false, title }: IHeader) {
 
 const styles = StyleSheet.create({
     header: {
-        paddingTop: 26,
+        paddingTop: 36,
         alignItems: 'flex-start',
         marginHorizontal: 38,
     },

@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
+        zIndex: 10,
         top: -50,
     },
     iconText: {

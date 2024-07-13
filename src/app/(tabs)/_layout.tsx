@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native'
-import { Entypo, Feather, FontAwesome, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { Platform, StyleSheet, TouchableOpacity } from 'react-native'
+import { Feather, FontAwesome, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 export default function TabLayout() {
   return (
@@ -13,7 +13,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: '#fff',
         tabBarInactiveTintColor: '#000',
         tabBarButton: (props) => <TouchableOpacity {...props} />,
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: [styles.tabBar, Platform.OS === 'ios' && styles.tabBarIOS],
       }}>
       <Tabs.Screen
         name="home"
@@ -62,7 +62,8 @@ export default function TabLayout() {
 const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: '#F0F4FF',
-    height: 100,
-    marginBottom: -50
   },
+  tabBarIOS: {
+    marginBottom: -50
+  }
 });

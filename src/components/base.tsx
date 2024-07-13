@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-start",
         paddingTop: 45,
-        marginBottom: -50
+        height: '100%'
     },
 });
 

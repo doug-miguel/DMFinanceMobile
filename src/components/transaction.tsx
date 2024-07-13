@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
         alignItems: 'center',
         textAlign: 'center',
-        width: 45,
+        width: 47,
     },
     operatorText: {
         textAlign: 'center',

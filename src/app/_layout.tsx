@@ -13,6 +13,6 @@ const styled = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#3B82F6',
-        paddingTop: 30,
+        overflow: "hidden",
     }
 })
