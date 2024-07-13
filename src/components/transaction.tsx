@@ -3,6 +3,7 @@ import { FontAwesome6 } from "@expo/vector-icons";
 import { StyleSheet, View, Text } from "react-native";
 
 import Separator from "./separator";
+import { EntertainmentComponente, FoodComponente, GiftComponente, GroceryComponente, HousingComponente, MedicineComponente, OthersComponente, SavingsComponente, TransportComponente, WageComponente } from "@/assets/images/SvgComponent";
 
 interface TransactionProps {
     id: number,
@@ -25,10 +26,24 @@ export default function TransactionAction({ operation, date, recurrence, value, 
         return `${hora}:${minuto} ${dia}/${mes}`;
     }
 
+    function icons() {
+        if (svg === 'Salario') return <WageComponente width={30} height={30} />
+        if (svg === 'Comida') return <FoodComponente width={30} height={30} />
+        if (svg === 'Transporte') return <TransportComponente width={30} height={30} />
+        if (svg === 'Medicamento') return <MedicineComponente width={30} height={30} />
+        if (svg === 'Mercado') return <GroceryComponente width={30} height={30} />
+        if (svg === 'Moradia') return <HousingComponente width={30} height={30} />
+        if (svg === 'Presente') return <GiftComponente width={30} height={30} />
+        if (svg === 'Poupança') return <SavingsComponente width={30} height={30} />
+        if (svg === 'Entreterimento') return <EntertainmentComponente width={30} height={30} />
+        if (svg === 'Outros') return <OthersComponente width={30} height={30} />
+    }
+
+
     return (
         <View style={styles.container}>
             <View style={styles.colorIcon}>
-                <FontAwesome6 name={svg} size={24} color="#FFF" />
+                {icons()}
             </View>
             <View style={styles.content}>
                 <View style={styles.actionDate}>

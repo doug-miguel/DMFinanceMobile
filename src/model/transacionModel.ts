@@ -4,7 +4,7 @@ export const ListtransactionArrayHome = [
         operation: 'credito',
         date: '2024-07-07T10:30:00Z',
         recurrence: 'Mensal',
-        svg: 'money-check-dollar',
+        svg: 'Salario',
         value: 7000,
         actionName: 'Salario'
     },
@@ -13,7 +13,7 @@ export const ListtransactionArrayHome = [
         operation: 'debito',
         date: '2024-07-09T10:30:00Z',
         recurrence: 'Semanal',
-        svg: 'store',
+        svg: 'Mercado',
         value: 120,
         actionName: 'Mercado'
     },
@@ -22,7 +22,7 @@ export const ListtransactionArrayHome = [
         operation: 'debito',
         date: '2024-07-8T10:30:00Z',
         recurrence: 'Nunca',
-        svg: 'hospital',
+        svg: 'Medicamento',
         value: 50,
         actionName: 'Farmacia'
     },
@@ -31,7 +31,7 @@ export const ListtransactionArrayHome = [
         operation: 'debito',
         date: '2024-07-07T10:30:00Z',
         recurrence: 'Mensal',
-        svg: 'house',
+        svg: 'Moradia',
         value: 1200,
         actionName: 'Aluguel'
     },
@@ -43,7 +43,7 @@ export const ListtransactionArray = [
         operation: 'credito',
         date: '2024-01-07T10:30:00Z',
         recurrence: 'Mensal',
-        svg: 'money-check-dollar',
+        svg: 'Salario',
         value: 7000,
         actionName: 'Salario'
     },
@@ -52,7 +52,7 @@ export const ListtransactionArray = [
         operation: 'debito',
         date: '2024-07-09T10:30:00Z',
         recurrence: 'Semanal',
-        svg: 'store',
+        svg: 'Mercado',
         value: 120,
         actionName: 'Mercado'
     },
@@ -61,7 +61,7 @@ export const ListtransactionArray = [
         operation: 'debito',
         date: '2024-03-8T10:30:00Z',
         recurrence: 'Nunca',
-        svg: 'hospital',
+        svg: 'Medicamento',
         value: 50,
         actionName: 'Farmacia'
     },
@@ -70,7 +70,7 @@ export const ListtransactionArray = [
         operation: 'debito',
         date: '2024-07-07T10:30:00Z',
         recurrence: 'Mensal',
-        svg: 'house',
+        svg: 'Moradia',
         value: 1200,
         actionName: 'Aluguel'
     },
@@ -79,7 +79,7 @@ export const ListtransactionArray = [
         operation: 'credito',
         date: '2024-05-07T10:30:00Z',
         recurrence: 'Mensal',
-        svg: 'money-check-dollar',
+        svg: 'Salario',
         value: 7000,
         actionName: 'Salario'
     },
@@ -88,7 +88,7 @@ export const ListtransactionArray = [
         operation: 'debito',
         date: '2024-03-09T10:30:00Z',
         recurrence: 'Semanal',
-        svg: 'store',
+        svg: 'Mercado',
         value: 120,
         actionName: 'Mercado'
     },
@@ -97,7 +97,7 @@ export const ListtransactionArray = [
         operation: 'debito',
         date: '2024-01-8T10:30:00Z',
         recurrence: 'Nunca',
-        svg: 'hospital',
+        svg: 'Medicamento',
         value: 50,
         actionName: 'Farmacia'
     },
@@ -106,7 +106,7 @@ export const ListtransactionArray = [
         operation: 'debito',
         date: '2024-04-07T10:30:00Z',
         recurrence: 'Mensal',
-        svg: 'house',
+        svg: 'Moradia',
         value: 1200,
         actionName: 'Aluguel'
     },

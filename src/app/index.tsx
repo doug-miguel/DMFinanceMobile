@@ -8,7 +8,6 @@ export default function HomeScreen() {
   const router = useRouter();
 
   function logar() {
-    console.log('logar')
     router.push('/home');
   }
 

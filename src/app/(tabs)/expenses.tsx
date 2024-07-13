@@ -9,7 +9,7 @@ import Select from "@/components/inputs/select";
 
 export default function Expenses() {
     const router = useRouter();
-    const options = ["", "Comida", "Transporte", "Medicamento", "Mercado", "Moradia", "Presente", "Poupança", "Entreterimento", "Outros"];
+    const options = ["", "Salario", "Comida", "Transporte", "Medicamento", "Mercado", "Moradia", "Presente", "Poupança", "Entreterimento", "Outros"];
     function create() { router.push('categories') }
     function select(option: any) {
         console.log("🚀 ~ select ~ option:", option)

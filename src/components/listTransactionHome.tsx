@@ -4,7 +4,6 @@ import { TransactionProps } from "@/types/transaction";
 
 interface ITransactions {
     Transactions: TransactionProps[],
-
 }
 
 export default function ListTransactionHome({ Transactions }: ITransactions) {

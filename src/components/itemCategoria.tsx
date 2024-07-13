@@ -1,19 +1,19 @@
-import { EntertainmentComponente, FoodComponente, GiftComponente, GroceryComponente, HousingComponente, MedicineComponente, OthersComponente, SavingsComponente, TransportComponente } from "@/assets/images/SvgComponent";
+import { EntertainmentComponente, FoodComponente, GiftComponente, GroceryComponente, HousingComponente, MedicineComponente, OthersComponente, SavingsComponente, TransportComponente, WageComponente } from "@/assets/images/SvgComponent";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 
 interface ItemCategoriProps {
-    icon: any;
+    icon: string;
     onPress: () => void;
 }
 
 export default function ItemCategoria({ icon, onPress }: ItemCategoriProps) {
     function icons() {
+        if (icon === 'Salario') return <WageComponente />
         if (icon === 'Comida') return <FoodComponente />
         if (icon === 'Transporte') return <TransportComponente />
         if (icon === 'Medicamento') return <MedicineComponente />
         if (icon === 'Mercado') return <GroceryComponente />
         if (icon === 'Moradia') return <HousingComponente />
-        if (icon === 'Presente') return <GiftComponente />
         if (icon === 'Poupança') return <SavingsComponente />
         if (icon === 'Entreterimento') return <EntertainmentComponente />
         if (icon === 'Outros') return <OthersComponente />

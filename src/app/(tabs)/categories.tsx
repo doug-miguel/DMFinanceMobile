@@ -4,18 +4,17 @@ import Balance from '@/components/balance';
 import Base from '@/components/base';
 import Header from '@/components/header';
 import ItemCategoria from '@/components/itemCategoria';
-import { useNavigation } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 
 export default function CategoriesScreen() {
     const router = useRouter()
     const categori = [
+        'Salario',
         'Comida',
         'Transporte',
         'Medicamento',
         'Mercado',
         'Moradia',
-        'Presente',
         'Poupança',
         'Entreterimento',
         'Outros',

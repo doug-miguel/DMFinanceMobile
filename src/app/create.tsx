@@ -25,7 +25,6 @@ export default function CreateScreen() {
     }
 
     function create() {
-        console.log('create')
         router.push('/')
     }
 
