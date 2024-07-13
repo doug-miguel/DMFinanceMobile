@@ -1,29 +1,30 @@
 import { StyleSheet, View, Text } from "react-native";
 import Separator from "./separator";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { HousingComponente, SavingsComponente, WageComponente } from "@/assets/images/SvgComponent";
 
 export default function SpentDay() {
     return (
         <View style={styles.container}>
             <View style={styles.goals}>
-                <MaterialCommunityIcons name="checkbox-blank-outline" size={68} color="black" />
+                <SavingsComponente />
                 <Text style={styles.goalsText}>{`Economia \npara metas`}</Text>
             </View>
             <Separator />
             <View style={styles.movement}>
                 <View style={styles.movementCard}>
-                    <MaterialCommunityIcons name="checkbox-blank-outline" size={30} color="black" />
+                    <WageComponente width={30} height={30} />
                     <View style={styles.movementCardText}>
-                        <Text style={styles.movementCardLabel}>Revenue Last Week</Text>
-                        <Text style={styles.movementCardNumber}>R$4.000.00</Text>
+                        <Text style={styles.movementCardLabel}>Ultimo Salario</Text>
+                        <Text style={styles.movementCardNumber}>R$10.000.00</Text>
                     </View>
                 </View>
                 <Separator direction="horizontal" />
                 <View style={styles.movementCard}>
-                    <MaterialCommunityIcons name="checkbox-blank-outline" size={30} color="black" />
+                    <HousingComponente width={30} height={30} />
                     <View style={styles.movementCardText}>
-                        <Text style={styles.movementCardLabel}>Revenue Last Week</Text>
-                        <Text style={styles.movementCardNumber}>R$4.000.00</Text>
+                        <Text style={styles.movementCardLabel}>Ultimo Gasto</Text>
+                        <Text style={styles.movementCardNumber}>R$1.200,00</Text>
                     </View>
                 </View>
             </View>
@@ -44,6 +45,8 @@ const styles = StyleSheet.create({
     },
     goals: {
         alignItems: 'center',
+        justifyContent: 'center',
+        gap: 10,
         flex: 1,
     },
     goalsText: {

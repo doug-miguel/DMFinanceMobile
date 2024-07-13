@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#3B82F6',
         gap: 40,
+        paddingTop: 15
     },
     content: {
         flex: 1,

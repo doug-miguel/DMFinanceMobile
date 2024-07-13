@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#3B82F6',
-        gap: 40
+        gap: 40,
+        paddingTop: 15
     },
     balance: {
         backgroundColor: '#fff',
