@@ -14,7 +14,7 @@ export default function Header({ back = false, title }: IHeader) {
     const router = useRouter();
 
     function backRouter() {
-        navigation.goBack()
+        navigation.goBack();
     }
 
     function notificationRouter() {
