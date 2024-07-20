@@ -8,8 +8,8 @@ interface BaseProps {
 
 export default function BaseScroll({ children, style }: BaseProps) {
     return (
-        <Base>
-            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={[styles.container, style]}>
+        <Base style={style}>
+            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.container}>
                 <ScrollView>
                     {children}
                 </ScrollView>
