@@ -27,7 +27,7 @@ export default function UserScreen() {
                     <TouchableOpacity onPress={() => nav('/setting')}>
                         <View style={styles.button}>
                             <SettingComponente />
-                            <Text style={styles.buttonText}>Configurações de Grupo</Text>
+                            <Text style={styles.buttonText}>Grupo de compartilhamento</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => nav('/')}>
