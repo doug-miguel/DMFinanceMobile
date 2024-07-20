@@ -1,4 +1,5 @@
 import Base from "@/components/base";
+import BaseScroll from "@/components/baseScroll";
 import ButtonCore from "@/components/buttons/button";
 import InputCore from "@/components/inputs/input";
 import Select from "@/components/inputs/select";
@@ -33,29 +34,25 @@ export default function ResetScreen() {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Recuperar senha!</Text>
-            <Base>
-                <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}>
-                    <ScrollView style={styles.content}>
-                        <Text style={styles.textBase}>Redefinir senha!</Text>
-                        {!reset &&
-                            <View style={styles.response}>
-                                <Select title="Selecione uma frace e responda" options={options} onSelect={onSelectMessage} />
-                                <InputCore title="Resposta" />
-                                <ButtonCore onPress={onNext}>Proxima etapa</ButtonCore>
-                                <ButtonCore onPress={navigate} variable="secondary">Cancelar</ButtonCore>
-                            </View>
-                        }
-                        {reset &&
-                            <View style={styles.response}>
-                                <InputCore title="Senha" type='default' secure={true} IconSecure={true} placeholder="********" onChangeText={(text) => inputText(text)} />
-                                <InputCore title="Confirmação de Senha" type='default' secure={true} placeholder="********" IconSecure={true} onChangeText={(text) => inputText(text)} />
-                                <ButtonCore onPress={navigate}>Confirmar</ButtonCore>
-                                <ButtonCore onPress={navigate} variable="secondary">Cancelar</ButtonCore>
-                            </View>
-                        }
-                    </ScrollView>
-                </KeyboardAvoidingView>
-            </Base>
+            <BaseScroll>
+                <Text style={styles.textBase}>Redefinir senha!</Text>
+                {!reset &&
+                    <View style={styles.response}>
+                        <Select title="Selecione uma frace e responda" options={options} onSelect={onSelectMessage} />
+                        <InputCore title="Resposta" />
+                        <ButtonCore onPress={onNext}>Proxima etapa</ButtonCore>
+                        <ButtonCore onPress={navigate} variable="secondary">Cancelar</ButtonCore>
+                    </View>
+                }
+                {reset &&
+                    <View style={styles.response}>
+                        <InputCore title="Senha" type='default' secure={true} IconSecure={true} placeholder="********" onChangeText={(text) => inputText(text)} />
+                        <InputCore title="Confirmação de Senha" type='default' secure={true} placeholder="********" IconSecure={true} onChangeText={(text) => inputText(text)} />
+                        <ButtonCore onPress={navigate}>Confirmar</ButtonCore>
+                        <ButtonCore onPress={navigate} variable="secondary">Cancelar</ButtonCore>
+                    </View>
+                }
+            </BaseScroll>
         </View>
     );
 }
