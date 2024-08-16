@@ -34,7 +34,7 @@ export default function CreateScreen() {
                 <Text style={styles.text}>Criar conta!</Text>
                 <View style={styles.content}>
                     <InputCore title="Nome completo" type='default' placeholder="Nome" onChangeText={(text) => inputText(text)} />
-                    <InputCore title="Usuário ou Email" type='default' placeholder="Usuário ou Email" onChangeText={(text) => inputText(text)} />
+                    <InputCore title="Email" type='default' placeholder="Usuário ou Email" onChangeText={(text) => inputText(text)} />
                     <InputCore title="Telefone" type='default' placeholder="(XX) XXXXX-XXXX" onChangeText={(text) => inputText(text)} />
                     <InputCore title="Data de nacimento" type='default' placeholder="XX/XX/XXXX" onChangeText={(text) => inputText(text)} />
                     <Select title="Selecione uma frace e responda" options={options} onSelect={onSelectMessage} />
