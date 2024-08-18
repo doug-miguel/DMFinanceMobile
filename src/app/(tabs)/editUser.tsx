@@ -3,6 +3,7 @@ import ButtonCore from "@/components/buttons/button";
 import Header from "@/components/header";
 import InputCore from "@/components/inputs/input";
 import Select from "@/components/inputs/select";
+import { options } from "@/hooks/options";
 import { useRouter } from "expo-router";
 import React from "react";
 import { View, StyleSheet, Text, KeyboardAvoidingView, ScrollView, Platform } from "react-native";
@@ -11,15 +12,11 @@ export default function EditUser() {
     const [message, setMessage] = React.useState('');
     const router = useRouter();
 
-    const options: string[] = ["", "Qual primeira escola que estudou"];
-
     function onSelectMessage(mes: string) {
-        console.log("🚀 ~ onSelectMen ~ mes:", mes);
         setMessage(mes)
     }
 
     function inputText(text: string) {
-        console.log("🚀 ~ inputText ~ text:", text)
     }
 
     function navigate() {

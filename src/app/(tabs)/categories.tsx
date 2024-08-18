@@ -5,22 +5,12 @@ import Base from '@/components/base';
 import Header from '@/components/header';
 import ItemCategoria from '@/components/itemCategoria';
 import { useRouter } from 'expo-router';
+import { category } from '@/utils/category';
 
 export default function CategoriesScreen() {
     const router = useRouter()
-    const categori = [
-        'Salario',
-        'Comida',
-        'Transporte',
-        'Medicamento',
-        'Mercado',
-        'Moradia',
-        'Poupança',
-        'Entreterimento',
-        'Outros',
-    ];
 
-    const detailsCategory = (id: string) => {
+    const detailsCategory = (id: number) => {
         router.navigate(`detailscategoria/${id}`);
     };
 
@@ -30,11 +20,11 @@ export default function CategoriesScreen() {
             <Balance amount={7000} amountSpent={3500} />
             <Base style={styles.content}>
                 <View style={styles.item}>
-                    {categori.map((item, index) => (
+                    {category.map((item, index) => (
                         <ItemCategoria
                             key={index}
-                            onPress={() => detailsCategory(item)}
-                            icon={item}
+                            onPress={() => detailsCategory(item.id)}
+                            icon={item.name}
                         />
                     ))}
                 </View>

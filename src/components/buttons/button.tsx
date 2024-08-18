@@ -5,10 +5,12 @@ interface IBtn extends PressableProps {
     onPress: () => void;
     children?: ReactNode;
     variable?: "primary" | "secondary";
-    size?: "sm" | "md" | "lg"
+    size?: "sm" | "md" | "lg",
+    loading?: boolean;
+    disabled?: boolean | null;
 }
 
-export default function ButtonCore({ onPress, children, size = "md", variable = "primary", ...rest }: IBtn) {
+export default function ButtonCore({ onPress, children, size = "md", variable = "primary", loading, disabled, ...rest }: IBtn) {
     const buttonStyle = [
         variable === "primary" ? styles.primary : styles.secondary,
         size === "sm" ? styles.sizesm : size === "lg" ? styles.sizelg : styles.sizemd
@@ -17,7 +19,8 @@ export default function ButtonCore({ onPress, children, size = "md", variable = 
     return (
         <Pressable
             onPress={onPress}
-            style={buttonStyle}
+            style={[buttonStyle, loading && styles.loading || disabled && styles.loading]}
+            disabled={disabled}
             {...rest}>
             <Text style={variable === "primary" ? styles.textPrimary : styles.textSecondary}>
                 {children}
@@ -69,5 +72,8 @@ const styles = StyleSheet.create({
     },
     sizelg: {
         width: 160,
+    },
+    loading: {
+        opacity: .5
     }
 });

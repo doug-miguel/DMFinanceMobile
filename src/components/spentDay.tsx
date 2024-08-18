@@ -1,9 +1,58 @@
 import { StyleSheet, View, Text } from "react-native";
 import Separator from "./separator";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { HousingComponente, SavingsComponente, WageComponente } from "@/assets/images/SvgComponent";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React from "react";
+import { TransactionProps } from "@/types/transaction";
+import { useFormattedReal } from "@/hooks/useFormattedReal";
+import { useFocusEffect } from "expo-router";
 
 export default function SpentDay() {
+    const [dataCategory, setDataCategory] = React.useState<TransactionProps>();
+    const [dataExpense, setDataExpense] = React.useState<TransactionProps>();
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getExpense();
+            getExpenseCategory();
+        }, [])
+    );
+
+    async function getExpenseCategory() {
+        const token = await AsyncStorage.getItem('@user_token');
+        const fetchOptions: RequestInit = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        };
+        const response = await fetch(`https://api-dm-finance.vercel.app/api/v1/expense/expensesId?category=1&size=1`, fetchOptions);
+        const result = await response.json();
+        setDataCategory(result.expenses[0]);
+    }
+
+    async function getExpense() {
+        const token = await AsyncStorage.getItem('@user_token');
+        const fetchOptions: RequestInit = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        };
+        const response = await fetch(`https://api-dm-finance.vercel.app/api/v1/expense/expensesId`, fetchOptions);
+        const result = await response.json();
+        const filterExpense = result.expenses.find((item: TransactionProps) => {
+            return item.category_id !== 1;
+        })
+        setDataExpense(filterExpense);
+    }
+
+    const formattedAmount = useFormattedReal(dataCategory?.price || 0);
+    const formattedAmountExpense = useFormattedReal(dataExpense?.price || 0);
+
+
     return (
         <View style={styles.container}>
             <View style={styles.goals}>
@@ -16,7 +65,7 @@ export default function SpentDay() {
                     <WageComponente width={30} height={30} />
                     <View style={styles.movementCardText}>
                         <Text style={styles.movementCardLabel}>Ultimo Salario</Text>
-                        <Text style={styles.movementCardNumber}>R$10.000.00</Text>
+                        <Text style={styles.movementCardNumber}>{formattedAmount}</Text>
                     </View>
                 </View>
                 <Separator direction="horizontal" />
@@ -24,7 +73,7 @@ export default function SpentDay() {
                     <HousingComponente width={30} height={30} />
                     <View style={styles.movementCardText}>
                         <Text style={styles.movementCardLabel}>Ultimo Gasto</Text>
-                        <Text style={styles.movementCardNumber}>R$1.200,00</Text>
+                        <Text style={styles.movementCardNumber}>{formattedAmountExpense}</Text>
                     </View>
                 </View>
             </View>

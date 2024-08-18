@@ -11,7 +11,7 @@ export default function ListTransaction({ Transactions }: ITransactions) {
     const groupTransactionsByMonth = () => {
         const groupedTransactions: { [key: string]: TransactionProps[] } = {};
         Transactions.forEach((transaction) => {
-            const date = new Date(transaction.date);
+            const date = new Date(transaction.created_at);
             const monthYearKey = `${date.getMonth() + 1}-${date.getFullYear()}`;
             if (!groupedTransactions[monthYearKey]) {
                 groupedTransactions[monthYearKey] = [];
@@ -48,12 +48,13 @@ export default function ListTransaction({ Transactions }: ITransactions) {
                         <TransactionAction
                             key={idx}
                             id={transaction.id}
-                            svg={transaction?.svg}
-                            operation={transaction.operation}
-                            date={transaction.date}
-                            recurrence={transaction.recurrence}
-                            value={transaction.value}
-                            actionName={transaction.actionName}
+                            category_id={transaction?.category_id}
+                            price={transaction.price}
+                            title={transaction.title}
+                            notes={transaction.notes}
+                            user_id={transaction.user_id}
+                            group_id={transaction.group_id}
+                            created_at={transaction.created_at}
                         />
                     ))}
                 </View>

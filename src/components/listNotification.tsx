@@ -11,7 +11,7 @@ export default function ListNotification({ Transactions }: ITransactions) {
     const groupTransactionsByDay = () => {
         const groupedTransactions: { [key: string]: TransactionProps[] } = {};
         Transactions.forEach((transaction) => {
-            const date = new Date(transaction.date);
+            const date = new Date(transaction.created_at);
             const dayMonthYearKey = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
             if (!groupedTransactions[dayMonthYearKey]) {
                 groupedTransactions[dayMonthYearKey] = [];
@@ -43,11 +43,11 @@ export default function ListNotification({ Transactions }: ITransactions) {
 
             return (
                 <View key={index}>
-                    <Text style={{ fontSize: 20, fontWeight: '600', marginVertical: 10, color: '#1E40AF' }}>
+                    <Text style={{ fontSize: 20, fontWeight: '600', marginBottom: 20, marginHorizontal: 'auto', color: '#1E40AF' }}>
                         {dayHeader}
                     </Text>
                     {transactions.map((transaction, idx) => (
-                        <ItemNotification key={idx} date={transaction.date} svg={transaction.svg} actionName={transaction.actionName} />
+                        <ItemNotification key={idx} created_at={transaction.created_at} notes={transaction.notes} category_id={transaction.category_id} title={transaction.title} />
                     ))}
                 </View>
             );

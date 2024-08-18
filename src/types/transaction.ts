@@ -1,9 +1,10 @@
 export interface TransactionProps {
     id: number;
-    operation: string;
-    date: string;
-    recurrence: string;
-    svg: string;
-    value: number;
-    actionName: string;
+    price: number;
+    title: string;
+    notes: string,
+    category_id: number;
+    user_id: 1,
+    group_id: null | number,
+    created_at: string;
 }

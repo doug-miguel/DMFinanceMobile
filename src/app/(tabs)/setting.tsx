@@ -13,7 +13,6 @@ export default function SettingGroup() {
     }
     const options = ["", "Grupo do Douglas", "Grupo da Anna"];
     function select(option: any) {
-        console.log("🚀 ~ select ~ option:", option)
     }
     function approve() { }
     function refuse() { }

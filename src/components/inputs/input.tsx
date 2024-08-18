@@ -1,17 +1,19 @@
 import { CloseComponente, OpenComponente } from "@/assets/images/SvgComponent";
 import React from "react";
-import { TextInput, Text, StyleSheet, View, TextInputProps } from "react-native";
+import { TextInput, Text, StyleSheet, View, TextInputProps, KeyboardTypeOptions } from "react-native";
+import { TextInputMask, TextInputMaskOptionProp } from "react-native-masked-text";
 
-interface InputCore extends TextInputProps {
+interface InputCore extends TextInputProps, TextInputMaskOptionProp {
     title?: string;
-    type?: "default" | "email-address" | "numeric" | "phone-pad" | "number-pad" | "decimal-pad";
+    type?: KeyboardTypeOptions;
     secure?: boolean;
     IconSecure?: boolean;
     placeholder?: string;
+    mask?: string;
     onChangeText?: (text: string) => void;
 }
 
-export default function InputCore({ title, type = "default", secure, IconSecure, onChangeText, placeholder, ...ress }: InputCore) {
+export default function InputCore({ title, type, secure, IconSecure, onChangeText, placeholder, mask, ...ress }: InputCore) {
     const [text, setText] = React.useState('');
     const [secureInput, setSecureInput] = React.useState(false);
 
@@ -35,16 +37,33 @@ export default function InputCore({ title, type = "default", secure, IconSecure,
         <View style={styles.container}>
             <Text style={styles.textInput}>{title}</Text>
             <View style={styles.containerInput}>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={handleTextChange}
-                    value={text}
-                    keyboardType={type}
-                    secureTextEntry={secureInput}
-                    placeholder={placeholder}
-                    placeholderTextColor="#3B82F6"
-                    {...ress}
-                />
+                {mask ? (
+                    <TextInputMask
+                        type={'custom'}
+                        options={{
+                            mask: mask
+                        }}
+                        style={styles.input}
+                        onChangeText={handleTextChange}
+                        value={text}
+                        keyboardType={type}
+                        secureTextEntry={secureInput}
+                        placeholder={placeholder}
+                        placeholderTextColor="#3B82F6"
+                        {...ress}
+                    />
+                ) : (
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={handleTextChange}
+                        value={text}
+                        keyboardType={type}
+                        secureTextEntry={secureInput}
+                        placeholder={placeholder}
+                        placeholderTextColor="#3B82F6"
+                        {...ress}
+                    />
+                )}
                 {IconSecure && (secureInput ? <Text style={styles.icon} onPress={visable}><OpenComponente /></Text> : <Text style={styles.icon} onPress={visable}><CloseComponente /></Text>)}
             </View>
         </View>

@@ -1,59 +1,39 @@
-import { FontAwesome6 } from "@expo/vector-icons";
-
 import { StyleSheet, View, Text } from "react-native";
 
 import Separator from "./separator";
 import { EntertainmentComponente, FoodComponente, GiftComponente, GroceryComponente, HousingComponente, MedicineComponente, OthersComponente, SavingsComponente, TransportComponente, WageComponente } from "@/assets/images/SvgComponent";
+import { icons } from "@/utils/icons";
+import { formatarData } from "@/utils/formatData";
 
 interface TransactionProps {
-    id: number,
-    operation: string,
-    date: string,
-    svg?: string,
-    recurrence: string | null,
-    value: number,
-    actionName: string
+    id: number;
+    price: number;
+    title: string;
+    notes: string,
+    category_id: number;
+    user_id: 1,
+    group_id: null | number,
+    created_at: string;
 }
 
-export default function TransactionAction({ operation, date, recurrence, value, actionName, svg }: TransactionProps) {
-    function formatarData(dataString: string): string {
-        const data = new Date(dataString);
-        const hora = data.getHours().toString().padStart(2, '0');
-        const minuto = data.getMinutes().toString().padStart(2, '0');
-        const dia = data.getDate().toString().padStart(2, '0');
-        const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Mês começa do zero
-
-        return `${hora}:${minuto} ${dia}/${mes}`;
-    }
-
-    function icons() {
-        if (svg === 'Salario') return <WageComponente width={30} height={30} />
-        if (svg === 'Comida') return <FoodComponente width={30} height={30} />
-        if (svg === 'Transporte') return <TransportComponente width={30} height={30} />
-        if (svg === 'Medicamento') return <MedicineComponente width={30} height={30} />
-        if (svg === 'Mercado') return <GroceryComponente width={30} height={30} />
-        if (svg === 'Moradia') return <HousingComponente width={30} height={30} />
-        if (svg === 'Presente') return <GiftComponente width={30} height={30} />
-        if (svg === 'Poupança') return <SavingsComponente width={30} height={30} />
-        if (svg === 'Entreterimento') return <EntertainmentComponente width={30} height={30} />
-        if (svg === 'Outros') return <OthersComponente width={30} height={30} />
-    }
-
-
+export default function TransactionAction({ category_id, price, created_at, group_id, id, notes, title, user_id, }: TransactionProps) {
     return (
         <View style={styles.container}>
             <View style={styles.colorIcon}>
-                {icons()}
+                {icons(category_id)}
             </View>
             <View style={styles.content}>
                 <View style={styles.actionDate}>
-                    <Text style={styles.action}>{actionName}</Text>
-                    <Text style={styles.date}>{formatarData(date)}</Text>
+                    <Text style={styles.action}>{title}</Text>
+                    <Text style={styles.date}>{formatarData(created_at)}</Text>
                 </View>
                 <Separator color="#3B82F6" direction="vertical" />
-                <Text style={styles.recurrenceText}>{recurrence}</Text>
+                <View >
+                    <Text style={styles.recurrenceTextDescrition}>Descrição</Text>
+                    <Text style={styles.recurrenceText}>{notes}</Text>
+                </View>
                 <Separator color="#3B82F6" direction="vertical" />
-                <Text style={[styles.operatorText, operation === 'credito' && styles.blueText]}>R$ {operation === 'credito' ? '' : '-'}{value}</Text>
+                <Text style={[styles.operatorText, category_id === 1 && styles.blueText]}>R$ {category_id === 1 ? '' : '-'}{price}</Text>
             </View>
         </View>
     )
@@ -75,10 +55,12 @@ const styles = StyleSheet.create({
     content: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        gap: 25
+        gap: 25,
+        maxWidth: '100%'
     },
     actionDate: {
         gap: 5,
+        width: '15%'
     },
     action: {
         fontSize: 15,
@@ -92,6 +74,16 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         textTransform: 'capitalize',
     },
+    recurrenceTextDescrition: {
+        fontSize: 14,
+        color: '#000000',
+        fontWeight: '600',
+        textTransform: 'capitalize',
+        alignItems: 'center',
+        textAlign: 'center',
+        marginBottom: 10,
+        width: 70,
+    },
     recurrenceText: {
         fontSize: 12,
         color: '#052224',
@@ -99,7 +91,7 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
         alignItems: 'center',
         textAlign: 'center',
-        width: 47,
+        width: 70,
     },
     operatorText: {
         textAlign: 'center',

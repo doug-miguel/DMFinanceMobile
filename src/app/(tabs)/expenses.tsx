@@ -12,7 +12,6 @@ export default function Expenses() {
     const options = ["", "Salario", "Comida", "Transporte", "Medicamento", "Mercado", "Moradia", "Presente", "Poupança", "Entreterimento", "Outros"];
     function create() { router.push('categories') }
     function select(option: any) {
-        console.log("🚀 ~ select ~ option:", option)
     }
     return (
         <View style={styles.container}>
@@ -22,7 +21,7 @@ export default function Expenses() {
                     <ScrollView style={styles.content}>
                         <View style={styles.inputs}>
                             <Select title="Categoria" options={options} onSelect={select} />
-                            <InputCore title="Data" placeholder="XX/XX/XXXX" type="default" />
+                            <InputCore title="Data de nascimento" type='phone-pad' placeholder="XX/XX/XXXX" mask="99/99/9999" />
                             <InputCore title="Valor" placeholder="XXX,XX" type="numeric" />
                             <InputCore title="Nome da despesa" placeholder="Exemplo: Rossi" type="default" />
                             <ButtonCore onPress={create}>Salvar</ButtonCore>

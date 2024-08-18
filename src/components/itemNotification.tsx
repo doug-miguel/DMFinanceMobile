@@ -1,44 +1,26 @@
-import { WageComponente, FoodComponente, TransportComponente, MedicineComponente, GroceryComponente, HousingComponente, GiftComponente, SavingsComponente, EntertainmentComponente, OthersComponente } from "@/assets/images/SvgComponent";
+import { formatarData } from "@/utils/formatData";
+import { icons } from "@/utils/icons";
 import { StyleSheet, View, Text } from "react-native";
 
 interface TransactionProps {
-    date: string,
-    svg: string,
-    actionName: string
+    created_at: string,
+    category_id: number,
+    title: string,
+    notes: string,
 }
 
-export default function ItemNotification({ svg, actionName, date }: TransactionProps) {
-    function formatarData(dataString: string): string {
-        const data = new Date(dataString);
-        const dia = data.getDate().toString().padStart(2, '0');
-        const mes = (data.getMonth() + 1).toString().padStart(2, '0');
-        return `${dia}/${mes}`;
-    }
-
-    function icons() {
-        if (svg === 'Salario') return <WageComponente width={30} height={30} />
-        if (svg === 'Comida') return <FoodComponente width={30} height={30} />
-        if (svg === 'Transporte') return <TransportComponente width={30} height={30} />
-        if (svg === 'Medicamento') return <MedicineComponente width={30} height={30} />
-        if (svg === 'Mercado') return <GroceryComponente width={30} height={30} />
-        if (svg === 'Moradia') return <HousingComponente width={30} height={30} />
-        if (svg === 'Presente') return <GiftComponente width={30} height={30} />
-        if (svg === 'Poupança') return <SavingsComponente width={30} height={30} />
-        if (svg === 'Entreterimento') return <EntertainmentComponente width={30} height={30} />
-        if (svg === 'Outros') return <OthersComponente width={30} height={30} />
-    }
-
+export default function ItemNotification({ category_id, title, created_at, notes }: TransactionProps) {
     return (
         <View style={styles.container}>
             <View style={styles.colorIcon}>
-                {icons()}
+                {icons(category_id)}
             </View>
             <View style={styles.content}>
                 <View style={styles.actionDate}>
-                    <Text style={styles.action}>{actionName}</Text>
-                    <Text style={styles.action}>Descrição do que foi gasto</Text>
+                    <Text style={styles.action}>{title}</Text>
+                    <Text style={styles.action}>{notes}</Text>
                 </View>
-                <Text style={styles.date}>{formatarData(date)}</Text>
+                <Text style={styles.date}>{formatarData(created_at)}</Text>
             </View>
         </View>
     )
@@ -49,6 +31,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 20,
         marginBottom: 24,
+        marginHorizontal: 'auto',
     },
     colorIcon: {
         backgroundColor: '#3B82F6',
@@ -62,6 +45,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'flex-end',
         width: 'auto',
+        minWidth: '75%',
         gap: 25,
     },
     actionDate: {

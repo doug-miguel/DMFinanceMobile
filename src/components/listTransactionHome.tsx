@@ -13,13 +13,13 @@ export default function ListTransactionHome({ Transactions }: ITransactions) {
                 <TransactionAction
                     key={index}
                     id={transaction.id}
-                    svg={transaction?.svg}
-                    operation={transaction.operation}
-                    date={transaction.date}
-                    recurrence={transaction.recurrence}
-                    value={transaction.value}
-                    actionName={transaction.actionName}
-                />
+                    category_id={transaction?.category_id}
+                    price={transaction.price}
+                    title={transaction.title}
+                    notes={transaction.notes}
+                    user_id={transaction.user_id}
+                    group_id={transaction.group_id}
+                    created_at={transaction.created_at} />
             ))}
         </View>
     )

@@ -3,29 +3,92 @@ import InputCore from "@/components/inputs/input";
 import Select from "@/components/inputs/select";
 import { useRouter } from "expo-router";
 import React from "react";
-import { View, StyleSheet, Text, KeyboardAvoidingView, ScrollView, Platform } from "react-native";
+import { View, StyleSheet, Text, KeyboardAvoidingView, ScrollView, Platform, Alert } from "react-native";
+import { parse, formatISO } from 'date-fns';
+import { options } from "@/hooks/options";
+
+interface FormData {
+    full_name: string;
+    username: string;
+    email: string;
+    phone: string;
+    birthday: string;
+    password: string;
+    passwordconfirm: string;
+    security_question: string;
+    security_response: string;
+}
 
 export default function CreateScreen() {
-    const [message, setMessage] = React.useState('');
+    const [error, setError] = React.useState<string | null>(null);
+    const [loading, setLoading] = React.useState<boolean | null>(null);
+    const [formData, setFormData] = React.useState<FormData>({
+        full_name: '',
+        username: '',
+        email: '',
+        phone: '',
+        birthday: '',
+        password: '',
+        passwordconfirm: '',
+        security_question: '',
+        security_response: ''
+    });
     const router = useRouter();
 
-    const options: string[] = ["", "Qual primeira escola que estudou ?"];
-
     function onSelectMessage(mes: string) {
-        console.log("🚀 ~ onSelectMen ~ mes:", mes);
-        setMessage(mes)
+        setFormData({ ...formData, security_question: mes });
     }
 
-    function inputText(text: string) {
-        console.log("🚀 ~ inputText ~ text:", text)
+    function inputText(field: keyof FormData, text: string) {
+        setFormData({ ...formData, [field]: text });
     }
 
     function navigate() {
-        router.push('/')
+        router.push('/');
     }
 
-    function create() {
-        router.push('/')
+    async function create() {
+        const { full_name, username, email, phone, birthday, password, passwordconfirm, security_question, security_response } = formData;
+        if (!full_name || !username || !email || !phone || !birthday || !password || !passwordconfirm || (security_question && !security_response)) {
+            return Alert.alert("Erro", "Todos os campos devem ser preenchidos.");
+        }
+
+        if (password !== passwordconfirm) {
+            return Alert.alert("Erro", "As senhas não coincidem.");
+        }
+
+        const [day, month, year] = birthday.split('/');
+        const parsedDate = parse(`${year}-${month}-${day}`, 'yyyy-MM-dd', new Date());
+        const formattedBirthday = formatISO(parsedDate);
+
+        setLoading(true);
+        const fetchOptions: RequestInit = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                full_name,
+                username,
+                email,
+                phone,
+                birthday: formattedBirthday,
+                password,
+                security_question,
+                security_response
+            }),
+        };
+        const response = await fetch(`https://api-dm-finance.vercel.app/api/v1/user/create`, fetchOptions);
+        const result = await response.json();
+        if (response.ok) {
+            router.push('/');
+            setError(null);
+        } else {
+            setLoading(null);
+            return setError(result.message);
+        }
+        setLoading(null);
+        setError(null);
     }
 
     return (
@@ -33,24 +96,27 @@ export default function CreateScreen() {
             <ScrollView>
                 <Text style={styles.text}>Criar conta!</Text>
                 <View style={styles.content}>
-                    <InputCore title="Nome completo" type='default' placeholder="Nome" onChangeText={(text) => inputText(text)} />
-                    <InputCore title="Email" type='default' placeholder="Usuário ou Email" onChangeText={(text) => inputText(text)} />
-                    <InputCore title="Telefone" type='default' placeholder="(XX) XXXXX-XXXX" onChangeText={(text) => inputText(text)} />
-                    <InputCore title="Data de nacimento" type='default' placeholder="XX/XX/XXXX" onChangeText={(text) => inputText(text)} />
-                    <Select title="Selecione uma frace e responda" options={options} onSelect={onSelectMessage} />
-                    {message !== '' && <InputCore title="Resposta" />}
-                    <InputCore title="Senha" type='default' secure={true} IconSecure={true} placeholder="********" onChangeText={(text) => inputText(text)} />
-                    <InputCore title="Confirmação de Senha" type='default' secure={true} placeholder="********" IconSecure={true} onChangeText={(text) => inputText(text)} />
+                    <InputCore title="Nome completo" type='default' placeholder="Nome" onChangeText={(text) => inputText('full_name', text)} />
+                    <InputCore title="Nome de usuário" type='default' placeholder="Usuário" onChangeText={(text) => inputText('username', text)} />
+                    <InputCore title="Email" type='default' placeholder="Email" onChangeText={(text) => inputText('email', text)} />
+                    <InputCore title="Telefone" type='phone-pad' placeholder="(XX) XXXXX-XXXX" mask="(99) 99999-9999" onChangeText={(text) => inputText('phone', text)} />
+                    <InputCore title="Data de nascimento" type='phone-pad' placeholder="XX/XX/XXXX" mask="99/99/9999" onChangeText={(text) => inputText('birthday', text)} />
+                    <Select title="Selecione uma frase e responda" options={options} onSelect={onSelectMessage} />
+                    {formData.security_question !== '' && <InputCore title="Resposta" onChangeText={(text) => inputText('security_response', text)} />}
+                    <InputCore title="Senha" type='default' secure={true} IconSecure={true} placeholder="********" onChangeText={(text) => inputText('password', text)} />
+                    <InputCore title="Confirmação de Senha" type='default' secure={true} placeholder="********" IconSecure={true} onChangeText={(text) => inputText('passwordconfirm', text)} />
+                    {error && <Text style={styles.error}>{error}</Text>}
                     <View style={styles.action}>
                         <ButtonCore onPress={navigate} size="sm" variable="secondary">Voltar</ButtonCore>
-                        <ButtonCore onPress={create} size="sm">Criar</ButtonCore>
+                        <ButtonCore onPress={create} size="sm" disabled={loading}>
+                            {loading ? 'Criando...' : 'Criar'}
+                        </ButtonCore>
                     </View>
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>
     );
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -84,5 +150,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginHorizontal: 10,
         gap: 10
+    },
+    error: {
+        textAlign: 'center',
+        color: 'red'
     }
 });
