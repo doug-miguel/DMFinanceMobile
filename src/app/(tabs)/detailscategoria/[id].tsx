@@ -18,8 +18,9 @@ export default function DetailsCategoriaScreen() {
     //@ts-ignore;
     const { id } = route.params;
 
-    const [data, setData] = React.useState();
+    const [data, setData] = React.useState<[]>();
     React.useEffect(() => {
+        setData([]);
         getExpense();
     }, [id])
 
@@ -52,8 +53,11 @@ export default function DetailsCategoriaScreen() {
                 {loading &&
                     <Loading />
                 }
-                {data &&
+                {data && data?.length > 0 &&
                     <ListTransaction Transactions={data} />
+                }
+                {data && data?.length === 0 &&
+                    <Text style={styles.noContent}>Não a despesas...</Text>
                 }
             </Base>
         </View>
@@ -70,4 +74,12 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         gap: 10
     },
+    noContent: {
+        color: '#000',
+        fontSize: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        marginVertical: 80
+    }
 });
