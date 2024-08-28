@@ -4,7 +4,6 @@ import { StyleSheet, View, Text } from 'react-native';
 import Base from '@/components/base';
 import ListTransaction from '@/components/listTransaction';
 import Header from '@/components/header';
-import ButtonCore from '@/components/buttons/button';
 import { useRouter } from 'expo-router';
 import Balance from '@/components/balance';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,14 +13,16 @@ import Loading from '@/components/loading';
 export default function DetailsCategoriaScreen() {
     const [loading, setLoading] = React.useState<boolean>();
     const route = useRoute();
-    const router = useRouter();
     //@ts-ignore;
     const { id } = route.params;
 
     const [data, setData] = React.useState<[]>();
+    const [labelId, setLabelId] = React.useState(0);
+
     React.useEffect(() => {
         setData([]);
         getExpense();
+        setLabelId(id - 1)
     }, [id])
 
     async function getExpense() {
@@ -40,16 +41,11 @@ export default function DetailsCategoriaScreen() {
         setLoading(false);
     }
 
-    function AddExpenses() {
-        router.push('expenses')
-    }
-
     return (
         <View style={styles.container}>
-            <Header title={category[id].name} back={true} />
+            <Header title={category[labelId].label} back={true} />
             <Balance amount={7000} amountSpent={3500} />
             <Base style={styles.content}>
-                <ButtonCore onPress={AddExpenses}>Add despesa</ButtonCore>
                 {loading &&
                     <Loading />
                 }

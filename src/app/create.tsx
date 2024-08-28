@@ -19,6 +19,11 @@ interface FormData {
     security_response: string;
 }
 
+interface ValueProps {
+    label: string;
+    value: string | number
+}
+
 export default function CreateScreen() {
     const [error, setError] = React.useState<string | null>(null);
     const [loading, setLoading] = React.useState<boolean | null>(null);
@@ -35,8 +40,8 @@ export default function CreateScreen() {
     });
     const router = useRouter();
 
-    function onSelectMessage(mes: string) {
-        setFormData({ ...formData, security_question: mes });
+    function onSelectMessage(mes: ValueProps) {
+        setFormData({ ...formData, security_question: mes.value.toString() });
     }
 
     function inputText(field: keyof FormData, text: string) {
@@ -108,8 +113,8 @@ export default function CreateScreen() {
                     {error && <Text style={styles.error}>{error}</Text>}
                     <View style={styles.action}>
                         <ButtonCore onPress={navigate} size="sm" variable="secondary">Voltar</ButtonCore>
-                        <ButtonCore onPress={create} size="sm" disabled={loading}>
-                            {loading ? 'Criando...' : 'Criar'}
+                        <ButtonCore onPress={create} size="sm" loading={loading}>
+                            Criar
                         </ButtonCore>
                     </View>
                 </View>

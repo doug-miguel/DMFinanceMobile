@@ -11,7 +11,7 @@ export default function SettingGroup() {
     function create() {
         router.push('user');
     }
-    const options = ["", "Grupo do Douglas", "Grupo da Anna"];
+    const options = [{ label: "", value: "" }];
     function select(option: any) {
     }
     function approve() { }
@@ -23,7 +23,7 @@ export default function SettingGroup() {
                 <View style={styles.contentGroup}>
                     <InputCore title="Nome do grupo" />
                     <InputCore title="Com quem você vai compartilhar suas despesas" />
-                    <ButtonCore onPress={create} >Criar</ButtonCore>
+                    <ButtonCore onPress={create}>Criar</ButtonCore>
                 </View>
                 <View style={styles.contentGroupSelect}>
                     <Select title="Grupos aguardando respostas" options={options} onSelect={select} />

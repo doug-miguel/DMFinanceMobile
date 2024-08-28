@@ -1,16 +1,18 @@
 import { ReactNode } from "react";
-import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
+import { Pressable, PressableProps, StyleSheet, Text, ViewStyle } from "react-native";
+import Loading from "../loading";
 
 interface IBtn extends PressableProps {
     onPress: () => void;
     children?: ReactNode;
     variable?: "primary" | "secondary";
     size?: "sm" | "md" | "lg",
-    loading?: boolean;
+    loading?: boolean | null;
     disabled?: boolean | null;
+    style?: ViewStyle,
 }
 
-export default function ButtonCore({ onPress, children, size = "md", variable = "primary", loading, disabled, ...rest }: IBtn) {
+export default function ButtonCore({ onPress, children, size = "md", variable = "primary", loading, disabled, style, ...rest }: IBtn) {
     const buttonStyle = [
         variable === "primary" ? styles.primary : styles.secondary,
         size === "sm" ? styles.sizesm : size === "lg" ? styles.sizelg : styles.sizemd
@@ -19,12 +21,15 @@ export default function ButtonCore({ onPress, children, size = "md", variable = 
     return (
         <Pressable
             onPress={onPress}
-            style={[buttonStyle, loading && styles.loading || disabled && styles.loading]}
+            style={[style, buttonStyle, loading && styles.loading || disabled && styles.loading]}
             disabled={disabled}
             {...rest}>
-            <Text style={variable === "primary" ? styles.textPrimary : styles.textSecondary}>
-                {children}
-            </Text>
+            {loading ?
+                <Loading /> :
+                <Text style={variable === "primary" ? styles.textPrimary : styles.textSecondary}>
+                    {children}
+                </Text>
+            }
         </Pressable >
     )
 }

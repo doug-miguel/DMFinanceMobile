@@ -4,19 +4,25 @@ import { Feather } from '@expo/vector-icons';
 
 interface SelectProps {
     title?: string;
-    options: string[];
-    onSelect: (value: string) => void;
+    options: ValueProps[];
+    onSelect: (value: ValueProps) => void;
+    clear?: () => void;
 }
 
-const Select: React.FC<SelectProps> = ({ title, options, onSelect }) => {
-    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+interface ValueProps {
+    label: string;
+    value: string | number
+}
+
+const Select: React.FC<SelectProps> = ({ title, options, onSelect, clear }) => {
+    const [selectedOption, setSelectedOption] = useState<ValueProps | null>(null);
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
     const toggleDropdown = () => {
         setDropdownVisible(!dropdownVisible);
     };
 
-    const handleSelectOption = (option: string) => {
+    const handleSelectOption = (option: ValueProps) => {
         setSelectedOption(option);
         setDropdownVisible(false);
         onSelect(option);
@@ -30,7 +36,7 @@ const Select: React.FC<SelectProps> = ({ title, options, onSelect }) => {
                 onPress={toggleDropdown}
                 activeOpacity={0.7}
             >
-                <Text style={styles.input}>{selectedOption || "Selecione"}</Text>
+                <Text style={styles.input}>{selectedOption?.label || "Selecione"}</Text>
                 <Feather name={dropdownVisible ? "chevron-up" : "chevron-down"} size={20} color="#1E3A8A" />
             </TouchableOpacity>
             {dropdownVisible && (
@@ -41,7 +47,7 @@ const Select: React.FC<SelectProps> = ({ title, options, onSelect }) => {
                             style={styles.option}
                             onPress={() => handleSelectOption(option)}
                         >
-                            <Text style={styles.optionText}>{option}</Text>
+                            <Text style={styles.optionText}>{option.label}</Text>
                         </TouchableOpacity>
                     ))}
                 </View>

@@ -18,6 +18,11 @@ interface FormDataPassword {
     passwordconfirm: string;
 }
 
+interface ValueProps {
+    label: string;
+    value: string | number
+}
+
 export default function ResetScreen() {
     const [reset, setReset] = React.useState(false);
     const [error, setError] = React.useState<string | null>(null);
@@ -40,8 +45,8 @@ export default function ResetScreen() {
         router.push('/')
     }
 
-    function onSelectMessage(mes: string) {
-        setFormData({ ...formData, security_question: mes });
+    function onSelectMessage(mes: ValueProps) {
+        setFormData({ ...formData, security_question: mes.value.toString() });
     }
 
     function inputText(field: keyof FormData, text: string) {
@@ -133,7 +138,7 @@ export default function ResetScreen() {
                     <View style={styles.response}>
                         <InputCore title="Senha" type='default' secure={true} IconSecure={true} placeholder="********" onChangeText={(text) => inputTextPassword('password', text)} />
                         <InputCore title="Confirmação de Senha" type='default' secure={true} placeholder="********" IconSecure={true} onChangeText={(text) => inputTextPassword('passwordconfirm', text)} />
-                        <ButtonCore onPress={updatePassword} disabled={loading}>
+                        <ButtonCore onPress={updatePassword} loading={loading}>
                             {loading ? 'Atualizando...' : 'Atualizar'}
                         </ButtonCore>
                         <ButtonCore onPress={navigate} variable="secondary">Cancelar</ButtonCore>

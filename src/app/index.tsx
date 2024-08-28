@@ -55,7 +55,7 @@ export default function HomeScreen() {
           {error && <Text style={styles.error}>{error}</Text>}
         </View>
         <View style={styles.action}>
-          <ButtonCore onPress={handleLogin} disabled={loading}>
+          <ButtonCore onPress={handleLogin} loading={loading}>
             {loading ? 'Carregando...' : 'Logar'}
           </ButtonCore>
           <Link href={'reset'} style={styles.reset}>Esqueci a senha!</Link>

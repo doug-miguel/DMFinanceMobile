@@ -8,12 +8,17 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { View, StyleSheet, Text, KeyboardAvoidingView, ScrollView, Platform } from "react-native";
 
+interface ValueProps {
+    label: string;
+    value: string | number
+}
+
 export default function EditUser() {
     const [message, setMessage] = React.useState('');
     const router = useRouter();
 
-    function onSelectMessage(mes: string) {
-        setMessage(mes)
+    function onSelectMessage(mes: ValueProps) {
+        setMessage(mes.value.toString())
     }
 
     function inputText(text: string) {
