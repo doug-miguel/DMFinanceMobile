@@ -28,12 +28,14 @@ export default function TransactionAction({ category_id, price, created_at, grou
                     <Text style={styles.date}>{formatarData(created_at)}</Text>
                 </View>
                 <Separator color="#3B82F6" direction="vertical" />
-                <View >
+                <View style={styles.actionDate}>
                     <Text style={styles.recurrenceTextDescrition}>Descrição</Text>
                     <Text style={styles.recurrenceText}>{notes}</Text>
                 </View>
                 <Separator color="#3B82F6" direction="vertical" />
-                <Text style={[styles.operatorText, category_id === 1 && styles.blueText]}>R$ {category_id === 1 ? '' : '-'}{price}</Text>
+                <View style={styles.actionDate}>
+                    <Text style={[styles.operatorText, category_id === 1 && styles.blueText]}>R$ {category_id === 1 ? '' : '-'}{price}</Text>
+                </View>
             </View>
         </View>
     )
@@ -43,27 +45,30 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         gap: 20,
-        marginBottom: 24
+        marginBottom: 24,
+        maxWidth: '95%'
     },
     colorIcon: {
         backgroundColor: '#3B82F6',
         borderRadius: 10,
+        height: 50,
         width: 50,
-        padding: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
+        maxWidth: '25%',
     },
     content: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        gap: 25,
-        maxWidth: '100%'
+        gap: 10,
+        maxWidth: '75%',
     },
     actionDate: {
         gap: 5,
-        width: '15%'
+        width: '33%',
+        textAlign: 'center',
     },
     action: {
-        fontSize: 15,
+        fontSize: 16,
         color: '#052224',
         fontWeight: '500',
         textTransform: 'capitalize',
